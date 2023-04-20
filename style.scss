@@ -1,0 +1,293 @@
+$aspect--size: 10rem;
+$aspect--border-width: 0.125rem;
+
+$signal--padding-width: 2rem;
+$signal--padding-width--internal-vertical: 0.125rem;
+$signal--padding-width--internal-horizontal: 0.25rem;
+$signal--border-width: 0.125rem;
+$signal--border-radius: $signal--padding-width;
+$signal--margin-adjustment: -0.125rem;
+
+@mixin aspect--glow-off {
+  border-color: #ccc;
+  box-shadow: 0 0 2.5rem 0.5rem #111c inset;
+}
+
+@mixin aspect--glow-on {
+  border-color: currentColor;
+  box-shadow: 0 0 2.5rem 0.5rem #111c inset, 0 0 0.75rem 0.25rem currentColor;
+}
+
+@mixin aspect--inactive {
+  @include aspect--glow-off;
+  opacity: 0.2;
+}
+
+@mixin aspect--active {
+  @include aspect--glow-on;
+  opacity: 1;
+}
+
+@mixin signal--border($side) {
+  border-#{$side}-width: $signal--border-width;
+}
+
+@mixin signal--border-radius($corner) {
+  border-#{$corner}-radius: $signal--border-radius;
+}
+
+@mixin signal--background {
+  background-color: #111;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+}
+
+@media (max-width: 600px), (max-height: 700px) {
+  html {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 400px), (max-height: 500px) {
+  html {
+    font-size: 8px;
+  }
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  display: flex;
+  justify-content: stretch;
+  align-items: stretch;
+  font-family: sans-serif;
+}
+
+a {
+  color: deepskyblue;
+}
+
+.btn {
+  padding: 0.5rem 1rem;
+  border: 0;
+  border-radius: 2px;
+  font-size: 1rem;
+  cursor: pointer;
+
+  &--red {
+    background-color: crimson;
+    color: white;
+
+    &:hover {
+      background-color: firebrick;
+    }
+  }
+
+  &--green {
+    background-color: forestgreen;
+    color: white;
+
+    &:hover {
+      background-color: green;
+    }
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
+}
+
+.instructions, .signal__container {
+  position: relative;
+  width: 50%;
+}
+
+.instructions {
+  display: flex;
+  flex-direction: column;
+  padding: 0 1rem 1rem;
+  background-color: #111;
+  color: white;
+
+  &__available, &__chosen {
+    border: 1px solid gray;
+  }
+
+  &__available {
+    max-height: 20rem;
+    margin-top: 1rem;
+    padding: 0 1rem;
+    background-color: #333;
+    overflow-y: auto;
+
+    ul {
+      padding-left: 0;
+      list-style: none;
+    }
+  }
+
+  &__heading {
+    margin-bottom: 0;
+  }
+
+  &__label {
+    vertical-align: bottom;
+  }
+
+  &__error {
+    margin-top: 0.25rem;
+  }
+
+  &__chosen {
+    flex-basis: 100%;
+    padding: 1rem;
+    background-color: #333;
+    color: white;
+    font-size: 1.25rem;
+    font-family: monospace;
+  }
+}
+
+.signal__container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(to bottom, deepskyblue, lightskyblue)
+}
+
+.signal {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-start;
+  position: relative;
+  z-index: 10;
+  font-size: 0;
+
+  &__row {
+    @include signal--background;
+
+    &:first-child {
+      @include signal--border-radius(top-left);
+      @include signal--border-radius(top-right);
+    }
+
+    &:not(:first-child) {
+      & .signal__unit {
+        margin-top: $signal--margin-adjustment;
+      }
+    }
+
+    &:last-child {
+      @include signal--border-radius(bottom-right);
+      @include signal--border-radius(bottom-left);
+
+      & .signal__unit {
+        padding-bottom: $signal--padding-width;
+        background-color: unset;
+      }
+    }
+  }
+
+  &__unit {
+    @include signal--background;
+    display: inline-block;
+    position: relative;
+    padding:
+      $signal--padding-width
+      $signal--padding-width
+      $signal--padding-width--internal-vertical
+      $signal--padding-width--internal-horizontal;
+    border: 0 solid white;
+
+    &:first-child {
+      padding-left: $signal--padding-width;
+    }
+
+    &:not(:first-child) {
+      margin-left: $signal--margin-adjustment;
+    }
+
+    &--red {
+      z-index: 5;
+      @include signal--border(top);
+      @include signal--border(left);
+      @include signal--border(right);
+      @include signal--border-radius(top-left);
+      @include signal--border-radius(top-right);
+    }
+
+    &--amber {
+      z-index: 4;
+      @include signal--border(left);
+      @include signal--border(right);
+    }
+
+    &--green {
+      z-index: 3;
+      @include signal--border(bottom);
+      @include signal--border(left);
+      @include signal--border(right);
+      @include signal--border-radius(bottom-left);
+      @include signal--border-radius(bottom-right);
+    }
+  }
+}
+
+.aspect {
+  @include aspect--inactive;
+  display: inline-block;
+  position: relative;
+  width: $aspect--size;
+  height: $aspect--size;
+  border-width: $aspect--border-width;
+  border-style: solid;
+  border-radius: 50%;
+  background-color: currentColor;
+  transition: all 0.3s;
+
+  &--red {
+    color: orangered;
+  }
+
+  &--amber {
+    color: gold;
+  }
+
+  &--green {
+    color: limegreen;
+  }
+
+  &--active {
+    @include aspect--active;
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    top: $aspect--border-width;
+    right: $aspect--border-width;
+    width: 80%;
+    height: 80%;
+    border-radius: 50%;
+    background-image: radial-gradient(#eee5, #eee3 25%, #eeeeee08 60%, transparent 85%);
+  }
+}
+
+.pole {
+  position: absolute;
+  left: calc(50% - 1.5rem);
+  right: 50%;
+  bottom: 0;
+  width: 3rem;
+  height: 50%;
+  background: linear-gradient(to right, #888, #bbb, #888);
+}

@@ -1,0 +1,221 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+}
+
+@media (max-width: 600px), (max-height: 700px) {
+  html {
+    font-size: 12px;
+  }
+}
+@media (max-width: 400px), (max-height: 500px) {
+  html {
+    font-size: 8px;
+  }
+}
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  display: flex;
+  justify-content: stretch;
+  align-items: stretch;
+  font-family: sans-serif;
+}
+
+a {
+  color: deepskyblue;
+}
+
+.btn {
+  padding: 0.5rem 1rem;
+  border: 0;
+  border-radius: 2px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+.btn--red {
+  background-color: crimson;
+  color: white;
+}
+.btn--red:hover {
+  background-color: firebrick;
+}
+.btn--green {
+  background-color: forestgreen;
+  color: white;
+}
+.btn--green:hover {
+  background-color: green;
+}
+.btn:active {
+  transform: scale(0.95);
+}
+
+.instructions, .signal__container {
+  position: relative;
+  width: 50%;
+}
+
+.instructions {
+  display: flex;
+  flex-direction: column;
+  padding: 0 1rem 1rem;
+  background-color: #111;
+  color: white;
+}
+.instructions__available, .instructions__chosen {
+  border: 1px solid gray;
+}
+.instructions__available {
+  max-height: 20rem;
+  margin-top: 1rem;
+  padding: 0 1rem;
+  background-color: #333;
+  overflow-y: auto;
+}
+.instructions__available ul {
+  padding-left: 0;
+  list-style: none;
+}
+.instructions__heading {
+  margin-bottom: 0;
+}
+.instructions__label {
+  vertical-align: bottom;
+}
+.instructions__error {
+  margin-top: 0.25rem;
+}
+.instructions__chosen {
+  flex-basis: 100%;
+  padding: 1rem;
+  background-color: #333;
+  color: white;
+  font-size: 1.25rem;
+  font-family: monospace;
+}
+
+.signal__container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(to bottom, deepskyblue, lightskyblue);
+}
+
+.signal {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-start;
+  position: relative;
+  z-index: 10;
+  font-size: 0;
+}
+.signal__row {
+  background-color: #111;
+}
+.signal__row:first-child {
+  border-top-left-radius: 2rem;
+  border-top-right-radius: 2rem;
+}
+.signal__row:not(:first-child) .signal__unit {
+  margin-top: -0.125rem;
+}
+.signal__row:last-child {
+  border-bottom-right-radius: 2rem;
+  border-bottom-left-radius: 2rem;
+}
+.signal__row:last-child .signal__unit {
+  padding-bottom: 2rem;
+  background-color: unset;
+}
+.signal__unit {
+  background-color: #111;
+  display: inline-block;
+  position: relative;
+  padding: 2rem 2rem 0.125rem 0.25rem;
+  border: 0 solid white;
+}
+.signal__unit:first-child {
+  padding-left: 2rem;
+}
+.signal__unit:not(:first-child) {
+  margin-left: -0.125rem;
+}
+.signal__unit--red {
+  z-index: 5;
+  border-top-width: 0.125rem;
+  border-left-width: 0.125rem;
+  border-right-width: 0.125rem;
+  border-top-left-radius: 2rem;
+  border-top-right-radius: 2rem;
+}
+.signal__unit--amber {
+  z-index: 4;
+  border-left-width: 0.125rem;
+  border-right-width: 0.125rem;
+}
+.signal__unit--green {
+  z-index: 3;
+  border-bottom-width: 0.125rem;
+  border-left-width: 0.125rem;
+  border-right-width: 0.125rem;
+  border-bottom-left-radius: 2rem;
+  border-bottom-right-radius: 2rem;
+}
+
+.aspect {
+  border-color: #ccc;
+  box-shadow: 0 0 2.5rem 0.5rem rgba(17, 17, 17, 0.8) inset;
+  opacity: 0.2;
+  display: inline-block;
+  position: relative;
+  width: 10rem;
+  height: 10rem;
+  border-width: 0.125rem;
+  border-style: solid;
+  border-radius: 50%;
+  background-color: currentColor;
+  transition: all 0.3s;
+}
+.aspect--red {
+  color: orangered;
+}
+.aspect--amber {
+  color: gold;
+}
+.aspect--green {
+  color: limegreen;
+}
+.aspect--active {
+  border-color: currentColor;
+  box-shadow: 0 0 2.5rem 0.5rem rgba(17, 17, 17, 0.8) inset, 0 0 0.75rem 0.25rem currentColor;
+  opacity: 1;
+}
+.aspect::after {
+  content: "";
+  position: absolute;
+  top: 0.125rem;
+  right: 0.125rem;
+  width: 80%;
+  height: 80%;
+  border-radius: 50%;
+  background-image: radial-gradient(rgba(238, 238, 238, 0.3333333333), rgba(238, 238, 238, 0.2) 25%, rgba(238, 238, 238, 0.031372549) 60%, transparent 85%);
+}
+
+.pole {
+  position: absolute;
+  left: calc(50% - 1.5rem);
+  right: 50%;
+  bottom: 0;
+  width: 3rem;
+  height: 50%;
+  background: linear-gradient(to right, #888, #bbb, #888);
+}
+
+/*# sourceMappingURL=style.css.map */

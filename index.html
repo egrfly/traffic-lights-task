@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Traffic Lights</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="instructions">
+    <h2 class="instructions__heading">Your task</h2>
+    <div class="instructions__available">
+      <p><strong>WARNING:</strong> this task may not be suitable for those with photosensitive epilepsy. Traffic lights may flicker rapidly if the <code>wait</code> command is not used appropriately.</p>
+      <hr>
+      <p>The objective is to mimic, as accurately as possible, a set of UK traffic lights.</p>
+      <p>For a quick reminder of the light sequence involved, <a href="https://www.youtube.com/watch?v=hMzV58Y_1wE" target="_blank"> this demonstration video</a> should help.</p>
+      <p>The following commands are available to you:</p>
+      <ul>
+        <li><code>red off</code></li>
+        <li><code>red on</code></li>
+        <li><code>amber off</code></li>
+        <li><code>amber on</code></li>
+        <li><code>green off</code></li>
+        <li><code>green on</code></li>
+        <li><code>wait x</code>&emsp;(replace <code>x</code> by the number of seconds you wish to wait for before moving onto the next command)</li>
+      </ul>
+      <p>You should write one command per line. The sequence of commands will repeat until stopped.</p>
+    </div>
+    <h2 class="instructions__heading"><label for="commands" class="instructions__label">Your commands</label>&emsp;<button id="start" class="btn btn--green">Start</button>&ensp;<button id="stop" class="btn btn--red">Stop</button></h3>
+    <p id="error" class="instructions__error"></p>
+    <textarea id="commands" class="instructions__chosen"></textarea>
+  </div>
+  <div class="signal__container">
+    <form class="signal">
+      <div class="signal__row">
+        <div class="signal__unit signal__unit--red">
+          <div id="red" class="aspect aspect--red"></div>
+        </div>
+      </div>
+      <div class="signal__row">
+        <div class="signal__unit signal__unit--amber">
+          <div id="amber" class="aspect aspect--amber"></div>
+        </div>
+      </div>
+      <div class="signal__row">
+        <div class="signal__unit signal__unit--green">
+          <div id="green" class="aspect aspect--green"></div>
+        </div>
+      </div>
+    </form>
+    <div class="pole"></div>
+  </div>
+  <script src="main.js"></script>
+</body>
+</html>
